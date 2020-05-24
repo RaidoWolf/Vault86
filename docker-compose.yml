@@ -1,0 +1,59 @@
+version: '3'
+
+services:
+  minecraft:
+    image: dangerbarber/papermc:latest
+    stdin_open: true
+    tty: true
+    restart: always
+    networks:
+      - minecraft
+    ports:
+      - 25565:25565
+      - 25590:25590
+      - 25591:25591
+      - 25592:25592
+    volumes:
+      - config:/opt/minecraft/config
+      - worlds:/opt/minecraft/worlds
+      - plugins:/opt/minecraft/plugins
+      - data:/opt/minecraft/data
+      - logs:/opt/minecraft/logs
+  
+  nginx:
+    image: nginx:latest
+    restart: always
+    networks:
+      - minecraft
+    ports:
+      - 25600:80
+    volumes:
+      - nginx_config:/etc/nginx
+      - plugins:/var/www/plugins
+  
+  mysql:
+    image: mariadb:latest
+    restart: always
+    networks:
+      - minecraft
+    ports:
+      - 25601:3306
+    volumes:
+      - mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: CHANGEME
+      MYSQL_DATABASE: minecraft
+      MYSQL_USER: minecraft
+      MYSQL_PASSWORD: CHANGEME
+
+volumes:
+  config: {}
+  worlds: {}
+  plugins: {}
+  data: {}
+  logs: {}
+  nginx_config: {}
+  mysql_data: {}
+
+networks:
+  minecraft: {}
