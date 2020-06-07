@@ -9,27 +9,15 @@ services:
     networks:
       - minecraft
     ports:
-      - 25565:25565
-      - 25590:25590
-      - 25591:25591
-      - 25592:25592
+      - 25565:25565 # minecraft port
+      - 25590:25590 # dynmap port
+      - 25591:25591 # webconsole websocket port
     volumes:
       - config:/opt/minecraft/config
       - worlds:/opt/minecraft/worlds
       - plugins:/opt/minecraft/plugins
       - data:/opt/minecraft/data
       - logs:/opt/minecraft/logs
-  
-  nginx:
-    image: nginx:latest
-    restart: always
-    networks:
-      - minecraft
-    ports:
-      - 25600:80
-    volumes:
-      - nginx_config:/etc/nginx
-      - plugins:/var/www/plugins
   
   mysql:
     image: mariadb:latest
@@ -52,7 +40,6 @@ volumes:
   plugins: {}
   data: {}
   logs: {}
-  nginx_config: {}
   mysql_data: {}
 
 networks:
