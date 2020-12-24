@@ -5,6 +5,8 @@ services:
     image: dangerbarber/papermc:latest
     stdin_open: true
     tty: true
+    depends_on:
+      - mysql
     restart: always
     networks:
       - minecraft
