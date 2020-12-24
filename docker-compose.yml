@@ -2,7 +2,9 @@ version: '3'
 
 services:
   minecraft:
-    build: ./papermc/Dockerfile
+    build:
+      context: ./papermc
+      dockerfile: Dockerfile
     stdin_open: true
     tty: true
     depends_on:
