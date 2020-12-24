@@ -24,8 +24,6 @@ services:
     restart: always
     networks:
       - minecraft
-    ports:
-      - 25601:3306
     volumes:
       - mysql_data:/var/lib/mysql
     environment:
