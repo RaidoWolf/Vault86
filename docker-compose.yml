@@ -28,10 +28,10 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: CHANGEME
-      MYSQL_DATABASE: minecraft
-      MYSQL_USER: minecraft
-      MYSQL_PASSWORD: CHANGEME
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
 
 volumes:
   config: {}
