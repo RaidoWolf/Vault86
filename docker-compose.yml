@@ -13,7 +13,6 @@ services:
     ports:
       - 25565:25565 # minecraft port
       - 25590:25590 # dynmap port
-      - 25591:25591 # webconsole websocket port
     volumes:
       - config:/opt/minecraft/config
       - worlds:/opt/minecraft/worlds
