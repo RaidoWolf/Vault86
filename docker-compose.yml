@@ -2,7 +2,7 @@ version: '3'
 
 services:
   minecraft:
-    image: dangerbarber/papermc:latest
+    build: ./papermc/Dockerfile
     stdin_open: true
     tty: true
     depends_on:
