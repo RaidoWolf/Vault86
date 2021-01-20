@@ -12,7 +12,7 @@ LABEL maintainer="Alexander Barber <alex@dangerzonegames.com>"
 
 # Paper Options
 ARG JAVA_VERSION
-ARG PAPER_VERSION=1.16.4
+ARG PAPER_VERSION=1.16.5
 ARG PAPER_BUILD=latest
 ARG PAPER_DOWNLOAD_URL=https://papermc.io/api/v1/paper/${PAPER_VERSION}/${PAPER_BUILD}/download
 ARG BUILD_USER=build
