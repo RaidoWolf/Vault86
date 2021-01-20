@@ -14,7 +14,7 @@ services:
       - minecraft
     ports:
       - 25565:25565 # minecraft port
-      - 25590:25590 # dynmap port
+      - 127.0.0.1:25590:25590 # dynmap port
     volumes:
       - config:/opt/minecraft/config
       - worlds:/opt/minecraft/worlds
