@@ -18,7 +18,7 @@ ARG PAPER_DOWNLOAD_URL=https://papermc.io/api/v1/paper/${PAPER_VERSION}/${PAPER_
 ARG BUILD_USER=build
 
 # Build
-RUN apk add openjdk${JAVA_VERSION}-jdk
+RUN apk add openjdk${JAVA_VERSION}-jdk --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
 ENV BUILD_PATH=/opt/minecraft
 WORKDIR ${BUILD_PATH}
 ADD ${PAPER_DOWNLOAD_URL} paper.jar
@@ -71,7 +71,8 @@ COPY --from=build /opt/minecraft/paper.jar ${SERVER_PATH}/
 
 # Setup Environment
 ADD docker-entrypoint.sh docker-entrypoint.sh
-RUN apk add bash openjdk${JAVA_VERSION}-jdk
+RUN apk add bash
+RUN apk add openjdk${JAVA_VERSION}-jdk --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
 RUN chmod +x docker-entrypoint.sh
 RUN addgroup minecraft && \
     adduser --disabled-password --home ${MINECRAFT_PATH} --shell /bin/bash minecraft -G minecraft && \
