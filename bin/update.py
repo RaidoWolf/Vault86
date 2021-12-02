@@ -47,7 +47,8 @@ if v_req.status_code == 200:
         b_data = b_req.json()
         highest_build = reduce(lambda acc, cur: higher_build(acc, cur), b_data["builds"])
         print(f"Latest build found for {highest_version}: {highest_build}")
-        f_req = requests.get(f"https://papermc.io/api/v2/projects/paper/versions/{highest_version}/builds/{highest_build}")
+        f_req = requests.get(
+            f"https://papermc.io/api/v2/projects/paper/versions/{highest_version}/builds/{highest_build}")
         if f_req.status_code == 200:
             f_data = f_req.json()
             filename = f_data["downloads"]["application"]["name"]
@@ -60,10 +61,12 @@ if v_req.status_code == 200:
             prior_filename = prior_values.get("PAPER_FILENAME", False) or "undefined"
             prior_sha256 = prior_values.get("PAPER_SHA256", False) or "undefined"
             print(f"Updating .env file ({dotenv_file})...")
-            dotenv.set_key(dotenv_file, "PAPER_VERSION", str(highest_version))
-            dotenv.set_key(dotenv_file, "PAPER_BUILD", str(highest_build))
-            dotenv.set_key(dotenv_file, "PAPER_FILENAME", str(filename))
-            dotenv.set_key(dotenv_file, "PAPER_SHA256", str(sha256))
+            # Docker is really dumb and won't handle quotes in values, so you have to disable quotes
+            # (dotenv will forcefully re-enable them if a space appears in the value though)
+            dotenv.set_key(dotenv_file, "PAPER_VERSION", str(highest_version), quote_mode="never")
+            dotenv.set_key(dotenv_file, "PAPER_BUILD", str(highest_build), quote_mode="never")
+            dotenv.set_key(dotenv_file, "PAPER_FILENAME", str(filename), quote_mode="never")
+            dotenv.set_key(dotenv_file, "PAPER_SHA256", str(sha256), quote_mode="never")
             print("Updated:")
             print(f"PAPER_VERSION: {prior_version} -> {highest_version}")
             print(f"PAPER_BUILD: {prior_build} -> {highest_build}")
