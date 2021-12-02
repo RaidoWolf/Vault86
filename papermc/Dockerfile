@@ -1,7 +1,3 @@
-# Java Options
-ARG JAVA_VERSION=16
-
-
 # ###########
 # Build Stage
 # ###########
@@ -12,9 +8,11 @@ LABEL maintainer="Alexander Barber <alex@dangerzonegames.com>"
 
 # Paper Options
 ARG JAVA_VERSION
-ARG PAPER_VERSION=1.17.1
-ARG PAPER_BUILD=latest
-ARG PAPER_DOWNLOAD_URL=https://papermc.io/api/v1/paper/${PAPER_VERSION}/${PAPER_BUILD}/download
+ARG PAPER_VERSION
+ARG PAPER_BUILD
+ARG PAPER_FILENAME
+ARG PAPER_SHA256
+ARG PAPER_DOWNLOAD_URL=https://papermc.io/api/v2/projects/paper/versions/${PAPER_VERSION}/builds/${PAPER_BUILD}/downloads/${PAPER_FILENAME}
 ARG BUILD_USER=build
 
 # Build
@@ -22,6 +20,8 @@ RUN apk add openjdk${JAVA_VERSION}-jdk --repository=http://dl-cdn.alpinelinux.or
 ENV BUILD_PATH=/opt/minecraft
 WORKDIR ${BUILD_PATH}
 ADD ${PAPER_DOWNLOAD_URL} paper.jar
+RUN sha256sum paper.jar
+RUN echo "${PAPER_SHA256} paper.jar" | sha256sum -c -
 RUN adduser --disabled-password --shell /bin/bash ${BUILD_USER} && \
     chown ${BUILD_USER} ${BUILD_PATH} -R
 USER ${BUILD_USER}
