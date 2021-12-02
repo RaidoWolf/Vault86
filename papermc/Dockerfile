@@ -72,7 +72,7 @@ COPY --from=build /opt/minecraft/paper.jar ${SERVER_PATH}/
 # Setup Environment
 ADD docker-entrypoint.sh docker-entrypoint.sh
 RUN apk add bash
-RUN apk add openjdk${JAVA_VERSION}-jdk --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
+RUN apk add openjdk${JAVA_VERSION} --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing
 RUN chmod +x docker-entrypoint.sh
 RUN addgroup minecraft && \
     adduser --disabled-password --home ${MINECRAFT_PATH} --shell /bin/bash minecraft -G minecraft && \
