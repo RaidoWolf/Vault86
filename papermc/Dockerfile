@@ -26,7 +26,6 @@ RUN adduser --disabled-password --shell /bin/bash ${BUILD_USER} && \
     chown ${BUILD_USER} ${BUILD_PATH} -R
 USER ${BUILD_USER}
 RUN java -jar ${BUILD_PATH}/paper.jar; exit 0
-RUN mv ${BUILD_PATH}/versions/${PAPER_VERSION}/paper-${PAPER_VERSION}.jar ${BUILD_PATH}/paper.jar
 
 
 # #########################
@@ -67,7 +66,7 @@ HEALTHCHECK --interval=30s --timeout=5s --start-period=120s \
 
 # Install Paper
 WORKDIR ${SERVER_PATH}
-COPY --from=build /opt/minecraft/paper.jar ${SERVER_PATH}/
+COPY --from=build /opt/minecraft ${SERVER_PATH}/
 
 # Setup Environment
 ADD docker-entrypoint.sh docker-entrypoint.sh
