@@ -26,6 +26,16 @@ RUN adduser --disabled-password --shell /bin/bash ${BUILD_USER} && \
     chown ${BUILD_USER} ${BUILD_PATH} -R
 USER ${BUILD_USER}
 RUN java -jar ${BUILD_PATH}/paper.jar; exit 0
+RUN rm ${BUILD_PATH}/server.properties
+RUN rm ${BUILD_PATH}/bukkit.yml
+RUN rm ${BUILD_PATH}/spigot.yml
+RUN rm ${BUILD_PATH}/paper.yml
+RUN rm -rf ${BUILD_PATH}/plugins
+RUN rm -rf ${BUILD_PATH}/logs
+RUN rm -rf ${BUILD_PATH}/world
+RUN rm -rf ${BUILD_PATH}/world_nether
+RUN rm -rf ${BUILD_PATH}/world_the_end
+
 
 
 # #########################
