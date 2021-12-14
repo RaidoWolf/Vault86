@@ -26,6 +26,7 @@ RUN adduser --disabled-password --shell /bin/bash ${BUILD_USER} && \
     chown ${BUILD_USER} ${BUILD_PATH} -R
 USER ${BUILD_USER}
 RUN java -jar ${BUILD_PATH}/paper.jar; exit 0
+RUN ls -lh ${BUILD_PATH}
 RUN rm ${BUILD_PATH}/server.properties
 RUN rm ${BUILD_PATH}/bukkit.yml
 RUN rm ${BUILD_PATH}/spigot.yml
