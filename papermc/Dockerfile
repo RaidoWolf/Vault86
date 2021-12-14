@@ -61,7 +61,7 @@ ENV PAPER_ARGS=""
 # Health Check
 RUN apk add python3 py3-pip
 RUN pip3 install --upgrade pip setuptools
-RUN pip3 install mcstatus
+RUN pip3 install --ignore-installed six mcstatus
 HEALTHCHECK --interval=30s --timeout=5s --start-period=120s \
     CMD mcstatus localhost:$( cat $PROPERTIES_LOCATION | grep "server-port" | cut -d'=' -f2 ) ping
 
