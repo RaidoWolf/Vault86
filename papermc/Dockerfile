@@ -26,7 +26,7 @@ RUN adduser --disabled-password --shell /bin/bash ${BUILD_USER} && \
     chown ${BUILD_USER} ${BUILD_PATH} -R
 USER ${BUILD_USER}
 RUN java -jar ${BUILD_PATH}/paper.jar; exit 0
-RUN ls -lahR ${BUILD_PATH}
+RUN ls -lahR ${BUILD_PATH}/cache
 RUN mv ${BUILD_PATH}/cache/patched_${PAPER_VERSION}.jar ${BUILD_PATH}/paper.jar
 
 
