@@ -20,8 +20,8 @@ RUN apk add openjdk${JAVA_VERSION} --repository=http://dl-cdn.alpinelinux.org/al
 ENV BUILD_PATH=/opt/minecraft
 WORKDIR ${BUILD_PATH}
 ADD ${PAPER_DOWNLOAD_URL} paper.jar
-RUN sha256sum paper.jar
-RUN echo "${PAPER_SHA256} paper.jar" | sha256sum -c -
+#RUN sha256sum paper.jar
+#RUN echo "${PAPER_SHA256} paper.jar" | sha256sum -c -
 RUN adduser --disabled-password --shell /bin/bash ${BUILD_USER} && \
     chown ${BUILD_USER} ${BUILD_PATH} -R
 USER ${BUILD_USER}
